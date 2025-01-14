@@ -23,3 +23,13 @@ go.work.sum
 
 # env file
 .env
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+coverage.out
+
+README.md
+Dockerfile
+main_test.go
+LICENSE
+OWNERS
+CHANGELOG

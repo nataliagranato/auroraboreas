@@ -24,8 +24,11 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
       - name: Security Scan
-        run: gosec ./...
+        run: ~/go/bin/gosec ./...
 
       - name: Dependency Check
         run: go mod tidy && go mod verify
