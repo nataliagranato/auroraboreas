@@ -1,12 +1,18 @@
-FROM golang:alpine as builder
+FROM golang:alpine AS builder
+
 ENV GO111MODULE=on
-RUN apk update && apk add --no-cache git
+
 WORKDIR /app
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
+
+# Removendo a versão específica do git que estava causando erro
+RUN apk update && apk add --no-cache git
+
+COPY go.mod go.sum ./
+RUN go mod tidy
+
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./bin/main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/bin/aurora
+
 FROM scratch
-COPY --from=builder /app/bin/main .
-CMD ["./main"]
+COPY --from=builder /app/bin/aurora .
+CMD ["./aurora"]
