@@ -12,7 +12,22 @@ permissions:
   packages: write
 
 jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
   releases-matrix:
+    needs: create-release
     name: Release Go Binary
     runs-on: ubuntu-latest
     strategy:
@@ -34,3 +49,4 @@ jobs:
           project_path: "."
           binary_name: "aurora"
           extra_files: LICENSE README.md
+          asset_name: "aurora-${{ github.ref_name }}-${{ matrix.goos }}-${{ matrix.goarch }}"
