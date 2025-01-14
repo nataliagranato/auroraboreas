@@ -1,5 +1,7 @@
 # Aurora Boreas
 
+[![CodeQL Advanced](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml) [![Go](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml)
+
 Um projeto Go que combina poesia e visualização de um céu estrelado com telemetria usando OpenTelemetry. Dedicado a Tainara Almeida.
 
 ## Sobre o Projeto
