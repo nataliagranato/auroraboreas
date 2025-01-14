@@ -1,6 +1,7 @@
 # Aurora Boreas
 
-[![CodeQL Advanced](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml) [![Go](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml) [![Scorecard supply-chain security](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml/badge.svg)](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml)
+[![CodeQL Advanced](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml) [![Go](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml) [![Scorecard supply-chain security](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml/badge.svg)](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/9918/badge)](https://www.bestpractices.dev/projects/9918)
+
 
 Um projeto Go que combina poesia e visualização de um céu estrelado com telemetria usando OpenTelemetry. Dedicado a Tainara Almeida.
 
@@ -12,27 +13,6 @@ Aurora Boreas é uma aplicação que imprime um poema para a amada Tainara Almei
 - Impressão de poema para Tainara Almeida
 - Animação de céu estrelado no terminal
 - Telemetria completa usando OpenTelemetry
-
-## Estrutura do Projeto
-
-```
-aurora-boreas/
-├── cmd/
-│   └── main.go
-├── internal/
-│   ├── animation/
-│   │   └── starry_sky.go
-│   ├── instrumentation/
-│   │   └── instrumentation.go
-│   └── poem/
-│       └── poem.go
-├── go.mod
-├── go.sum
-└── LICENSE
-└── CHANGELOG
-└── README.md
-
-```
 
 ## Pré-requisitos
 
