@@ -10,3 +10,7 @@ repos:
       - id: go-fmt
       - id: golangci-lint
       - id: go-unit-tests
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.3
+    hooks:
+      - id: gitleaks
