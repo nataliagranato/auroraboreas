@@ -146,10 +146,15 @@ version: ## Show version information
 	@echo "Commit:  $(COMMIT)"
 	@echo "Date:    $(DATE)"
 
-setup-homebrew: ## Setup Homebrew tap repository
+setup-homebrew: ## Setup Homebrew tap repository (deprecated - use update-homebrew)
 	@echo "$(YELLOW)Setting up Homebrew tap...$(NC)"
 	./setup-homebrew-tap.sh
 	@echo "$(GREEN)Homebrew tap setup completed!$(NC)"
+
+update-homebrew: ## Update Homebrew tap via GitHub Actions
+	@echo "$(YELLOW)Updating Homebrew tap via GitHub Actions...$(NC)"
+	./update-homebrew-tap.sh
+	@echo "$(GREEN)Homebrew tap update initiated!$(NC)"
 
 test-homebrew: ## Test Homebrew installation (requires tap to exist)
 	@echo "$(YELLOW)Testing Homebrew installation...$(NC)"

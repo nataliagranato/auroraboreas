@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script para criar e configurar o repositório homebrew-tap
-# Execute: ./setup-homebrew-tap.sh
+# Script simplificado para configurar o repositório homebrew-tap
+# Execute: ./setup-homebrew-tap-simple.sh
 
 set -e
 
@@ -12,101 +12,91 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo -e "${BLUE}🍺 Aurora Boreas Homebrew Tap Setup${NC}"
-echo "======================================"
+echo -e "${BLUE}🍺 Aurora Boreas Homebrew Tap Setup (Simple)${NC}"
+echo "=============================================="
 
-# Verificar se gh CLI está instalado
-if ! command -v gh &> /dev/null; then
-    echo -e "${RED}❌ GitHub CLI não está instalado${NC}"
-    echo "Instale com: brew install gh"
+# Verificar se git está instalado
+if ! command -v git &> /dev/null; then
+    echo -e "${RED}❌ Git não está instalado${NC}"
     exit 1
 fi
 
-# Verificar autenticação
-if ! gh auth status &> /dev/null; then
-    echo -e "${YELLOW}⚠️  Você não está autenticado no GitHub${NC}"
-    echo "Execute: gh auth login"
-    exit 1
+# Verificar se o token está configurado
+if [ -z "$USER_TOKEN" ]; then
+    echo -e "${YELLOW}⚠️  Variável USER_TOKEN não encontrada${NC}"
+    echo -e "${BLUE}💡 Configure com: export USER_TOKEN=seu_token_github${NC}"
+    echo -e "${BLUE}   Ou crie um arquivo .env com: USER_TOKEN=seu_token${NC}"
+    
+    # Tentar carregar de .env se existir
+    if [ -f ".env" ]; then
+        echo -e "${BLUE}📄 Carregando .env...${NC}"
+        source .env
+    fi
+    
+    if [ -z "$USER_TOKEN" ]; then
+        echo -e "${RED}❌ USER_TOKEN é obrigatório para fazer push${NC}"
+        exit 1
+    fi
 fi
 
 REPO_NAME="homebrew-tap"
 USERNAME="nataliagranato"
+EMAIL="nataliagranato@ufmg.br"
+REPO_URL="https://$USER_TOKEN@github.com/$USERNAME/$REPO_NAME.git"
+
+echo -e "${BLUE}🔧 Configurando Git...${NC}"
+git config --global user.name "$USERNAME"
+git config --global user.email "$EMAIL"
+git config --global credential.helper store
 
 echo -e "${BLUE}👤 Usuário: $USERNAME${NC}"
 echo -e "${BLUE}📦 Repositório: $REPO_NAME${NC}"
+echo -e "${BLUE}🔗 URL: $REPO_URL${NC}"
 
-# Verificar se o repositório já existe
-if gh repo view "$USERNAME/$REPO_NAME" &> /dev/null; then
-    echo -e "${GREEN}✓ Repositório já existe!${NC}"
-    if [ -d "$REPO_NAME" ]; then
-        echo -e "${YELLOW}📁 Removendo diretório local existente...${NC}"
-        rm -rf "$REPO_NAME"
-    fi
-    echo -e "${BLUE}📥 Clonando repositório...${NC}"
-    gh repo clone "$USERNAME/$REPO_NAME"
+# Remover diretório local se existir
+if [ -d "$REPO_NAME" ]; then
+    echo -e "${YELLOW}📁 Removendo diretório local existente...${NC}"
+    rm -rf "$REPO_NAME"
+fi
+
+# Clonar o repositório
+echo -e "${BLUE}📥 Clonando repositório...${NC}"
+if git clone "$REPO_URL" 2>/dev/null; then
+    echo -e "${GREEN}✓ Repositório clonado com sucesso!${NC}"
     cd "$REPO_NAME"
 else
-    echo -e "${BLUE}🔍 Repositório não encontrado. Tentando criar...${NC}"
-    
-    # Primeiro, tentar via REST API diretamente
-    echo -e "${YELLOW}🔧 Tentativa 1: Criando via GitHub CLI...${NC}"
-    if gh repo create "$USERNAME/$REPO_NAME" --public --description "Homebrew tap for Aurora Boreas" 2>/dev/null; then
-        echo -e "${GREEN}✓ Repositório criado com sucesso!${NC}"
-        gh repo clone "$USERNAME/$REPO_NAME"
-        cd "$REPO_NAME"
-    else
-        echo -e "${YELLOW}⚠️  Falha na criação automática${NC}"
-        echo -e "${BLUE}🛠️  Configurando para criação manual...${NC}"
-        
-        # Criar diretório local
-        mkdir -p "$REPO_NAME"
-        cd "$REPO_NAME"
-        git init -b main
-        
-        echo ""
-        echo -e "${YELLOW}┌─────────────────────────────────────────────┐${NC}"
-        echo -e "${YELLOW}│          CRIAÇÃO MANUAL NECESSÁRIA          │${NC}"
-        echo -e "${YELLOW}└─────────────────────────────────────────────┘${NC}"
-        echo ""
-        echo -e "${BLUE}� Passos para criar o repositório:${NC}"
-        echo ""
-        echo "1. Abra: https://github.com/new"
-        echo "2. Repository name: $REPO_NAME"
-        echo "3. Description: Homebrew tap for Aurora Boreas"
-        echo "4. ✓ Public"
-        echo "5. ✗ Add a README file"
-        echo "6. ✗ Add .gitignore"
-        echo "7. ✗ Choose a license"
-        echo "8. Click 'Create repository'"
-        echo ""
-        echo -e "${GREEN}Quando terminar, pressione Enter para continuar...${NC}"
-        read -r
-        
-        # Configurar remote
-        git remote add origin "https://github.com/$USERNAME/$REPO_NAME.git"
-        
-        # Verificar se foi criado
-        echo -e "${BLUE}🔍 Verificando se o repositório foi criado...${NC}"
-        sleep 2
-        if gh repo view "$USERNAME/$REPO_NAME" &> /dev/null; then
-            echo -e "${GREEN}✓ Repositório encontrado!${NC}"
-        else
-            echo -e "${RED}❌ Repositório não encontrado. Verifique se foi criado corretamente.${NC}"
-            exit 1
-        fi
-    fi
+    echo -e "${RED}❌ Falha ao clonar o repositório${NC}"
+    echo -e "${YELLOW}📋 Verifique se o repositório existe em: https://github.com/$USERNAME/$REPO_NAME${NC}"
+    echo -e "${BLUE}💡 Se não existir, crie manualmente em: https://github.com/new${NC}"
+    echo "   - Repository name: $REPO_NAME"
+    echo "   - Description: Homebrew tap for Aurora Boreas"
+    echo "   - ✓ Public"
+    echo "   - ✗ Add a README file"
+    exit 1
+fi
+
+# Verificar estrutura atual
+echo -e "${BLUE}📋 Verificando estrutura atual...${NC}"
+if [ -f "Formula/auroraboreas.rb" ]; then
+    echo -e "${GREEN}✓ Fórmula auroraboreas.rb já existe${NC}"
+else
+    echo -e "${YELLOW}📦 Criando estrutura da fórmula...${NC}"
 fi
 
 # Criar estrutura de diretórios
-echo -e "${YELLOW}📁 Criando estrutura de diretórios...${NC}"
+echo -e "${YELLOW}📁 Garantindo estrutura de diretórios...${NC}"
 mkdir -p Formula
 
-# Criar README
-echo -e "${YELLOW}📝 Criando README.md...${NC}"
-cp ../homebrew-tap-README.md README.md
+# Atualizar README se necessário
+if [ -f "../homebrew-tap-README.md" ]; then
+    echo -e "${YELLOW}📝 Atualizando README.md...${NC}"
+    cp ../homebrew-tap-README.md README.md
+else
+    echo -e "${YELLOW}⚠️  Arquivo homebrew-tap-README.md não encontrado${NC}"
+fi
 
-# Criar fórmula inicial (será substituída pelo GoReleaser)
-echo -e "${YELLOW}🍺 Criando fórmula inicial...${NC}"
+# Criar/atualizar fórmula inicial (será substituída pelo GoReleaser)
+echo -e "${YELLOW}🍺 Criando/atualizando fórmula inicial...${NC}"
 cat > Formula/auroraboreas.rb << 'EOF'
 # This file is auto-generated by GoReleaser
 # Do not edit manually
@@ -129,46 +119,98 @@ class Auroraboreas < Formula
 end
 EOF
 
-# Criar .gitignore
-echo -e "${YELLOW}📄 Criando .gitignore...${NC}"
-cat > .gitignore << 'EOF'
+# Criar .gitignore se não existir
+if [ ! -f ".gitignore" ]; then
+    echo -e "${YELLOW}📄 Criando .gitignore...${NC}"
+    cat > .gitignore << 'EOF'
 .DS_Store
 *.swp
 *.swo
 *~
 EOF
+else
+    echo -e "${GREEN}✓ .gitignore já existe${NC}"
+fi
 
-# Commit inicial
-echo -e "${YELLOW}📤 Fazendo commit inicial...${NC}"
+# Verificar se há mudanças para commitar
+echo -e "${BLUE}🔍 Verificando mudanças...${NC}"
 git add .
-git commit -m "Initial commit: Aurora Boreas Homebrew tap
 
-- Add Formula directory structure
-- Add initial auroraboreas formula (will be auto-updated)
-- Add README with usage instructions"
+if git diff --staged --quiet; then
+    echo -e "${GREEN}✓ Nenhuma mudança para commitar${NC}"
+    
+    # Voltar ao diretório principal
+    cd ..
+    
+    # Limpar diretório temporário se não houve mudanças
+    echo -e "${YELLOW}🧹 Limpando diretório temporário...${NC}"
+    rm -rf homebrew-tap
+    
+    PUSH_SUCCESS=true
+else
+    # Commit das mudanças
+    echo -e "${YELLOW}📤 Commitando mudanças...${NC}"
+    git commit -m "Update Aurora Boreas Homebrew tap
 
-# Push para o GitHub
-git push origin main
+- Update Formula structure
+- Update README with latest information
+- Ensure all required files are present
+- Formula will be auto-updated by GoReleaser on releases"
+    
+    # Push para o GitHub
+    echo -e "${YELLOW}📤 Fazendo push para GitHub...${NC}"
+    echo -e "${BLUE}💡 Se houver erro de autenticação, configure suas credenciais do GitHub${NC}"
+    
+    if git push origin main; then
+        echo -e "${GREEN}✅ Push realizado com sucesso!${NC}"
+        
+        # Voltar ao diretório principal
+        cd ..
+        
+        # Limpar diretório temporário apenas se o push foi bem-sucedido
+        echo -e "${YELLOW}🧹 Limpando diretório temporário...${NC}"
+        rm -rf homebrew-tap
+        
+        PUSH_SUCCESS=true
+    else
+        echo -e "${RED}❌ Erro no push${NC}"
+        echo -e "${YELLOW}🔧 Soluções possíveis:${NC}"
+        echo "1. Verifique se USER_TOKEN está correto e tem permissões de escrita"
+        echo "2. Gere um novo token em: https://github.com/settings/tokens"
+        echo "3. Configure: export USER_TOKEN=seu_novo_token"
+        echo "4. Ou use SSH: git remote set-url origin git@github.com:$USERNAME/$REPO_NAME.git"
+        echo ""
+        echo -e "${BLUE}📋 As mudanças foram commitadas localmente em: $(pwd)${NC}"
+        echo -e "${BLUE}   Você pode fazer push manual: cd homebrew-tap && git push origin main${NC}"
+        
+        # Voltar ao diretório principal mas manter o diretório homebrew-tap
+        cd ..
+        
+        PUSH_SUCCESS=false
+    fi
+fi
 
-echo -e "${GREEN}✅ Repositório homebrew-tap criado com sucesso!${NC}"
+echo ""
+if [ "$PUSH_SUCCESS" = true ]; then
+    echo -e "${GREEN}✅ Setup do Homebrew Tap concluído com sucesso!${NC}"
+else
+    echo -e "${YELLOW}⚠️  Setup do Homebrew Tap concluído (push pendente)${NC}"
+    echo -e "${BLUE}📁 Diretório mantido em: ./homebrew-tap${NC}"
+    echo -e "${BLUE}   Execute: cd homebrew-tap && git push origin main${NC}"
+fi
+
 echo
 echo -e "${BLUE}🔗 URLs importantes:${NC}"
 echo -e "   Repositório: ${GREEN}https://github.com/$USERNAME/$REPO_NAME${NC}"
-echo -e "   Clone URL: ${GREEN}git@github.com:$USERNAME/$REPO_NAME.git${NC}"
+echo -e "   Fórmula: ${GREEN}https://github.com/$USERNAME/$REPO_NAME/blob/main/Formula/auroraboreas.rb${NC}"
 echo
 echo -e "${BLUE}📝 Próximos passos:${NC}"
-echo "1. Certifique-se de que o GoReleaser está configurado para usar este tap"
-echo "2. Faça uma release no repositório principal para testar"
-echo "3. Verifique se a fórmula é atualizada automaticamente"
+echo "1. Faça uma release no repositório principal (git tag v0.2.0 && git push --tags)"
+echo "2. O GoReleaser atualizará automaticamente a fórmula"
+echo "3. Teste a instalação: brew tap $USERNAME/tap && brew install auroraboreas"
 echo
-echo -e "${BLUE}🍺 Para instalar via Homebrew:${NC}"
+echo -e "${BLUE}🍺 Para instalar via Homebrew (após a primeira release):${NC}"
 echo "   brew tap $USERNAME/tap"
 echo "   brew install auroraboreas"
-
-cd ..
-echo -e "${YELLOW}🧹 Limpando diretório temporário...${NC}"
-rm -rf homebrew-tap
-
+echo
 echo -e "${GREEN}🎉 Setup concluído!${NC}"
-echo -e "${BLUE}💡 Nota: O diretório homebrew-tap foi removido localmente.${NC}"
-echo -e "${BLUE}   Use o repositório separado: https://github.com/$USERNAME/$REPO_NAME${NC}"
