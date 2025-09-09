@@ -33,14 +33,11 @@ jobs:
         git config --global credential.helper store
 
     - name: Clone homebrew-tap repository
-      env:
-        USER_TOKEN: ${{ secrets.USER_TOKEN }}
       run: |
+        set -Eeuo pipefail
         echo "🍺 Cloning homebrew-tap repository..."
-        git clone https://$USER_TOKEN@github.com/nataliagranato/homebrew-tap.git homebrew-tap-work
-        cd homebrew-tap-work
-
-    - name: Update homebrew-tap files
+        git clone "https://x-access-token:${{ secrets.USER_TOKEN }}@github.com/nataliagranato/homebrew-tap.git" "homebrew-tap-work"
+        cd "homebrew-tap-work"
       run: |
         cd homebrew-tap-work
         
