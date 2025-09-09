@@ -146,5 +146,17 @@ version: ## Show version information
 	@echo "Commit:  $(COMMIT)"
 	@echo "Date:    $(DATE)"
 
+setup-homebrew: ## Setup Homebrew tap repository
+	@echo "$(YELLOW)Setting up Homebrew tap...$(NC)"
+	./setup-homebrew-tap.sh
+	@echo "$(GREEN)Homebrew tap setup completed!$(NC)"
+
+test-homebrew: ## Test Homebrew installation (requires tap to exist)
+	@echo "$(YELLOW)Testing Homebrew installation...$(NC)"
+	brew tap nataliagranato/tap || true
+	brew install auroraboreas
+	aurora --version
+	@echo "$(GREEN)Homebrew test completed!$(NC)"
+
 # Default target
 .DEFAULT_GOAL := help

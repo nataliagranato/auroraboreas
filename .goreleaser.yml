@@ -81,7 +81,7 @@ release:
   github:
     owner: nataliagranato
     name: auroraboreas
-  name_template: "Aurora Boreas v{{ .Version }}"
+  name_template: "{{ .Tag }}"
   header: |
     ## Aurora Boreas v{{ .Version }} 🌟
     

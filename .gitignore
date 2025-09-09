@@ -26,3 +26,6 @@ go.work.sum
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 coverage.out
+
+# Local homebrew-tap directory (use the separate repository instead)
+homebrew-tap/
