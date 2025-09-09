@@ -4,7 +4,33 @@ release:
     owner: nataliagranato
     name: auroraboreas
   name_template: Aurora Boreas v{{ .Version }}
-  header: "## Aurora Boreas v{{ .Version }} \U0001F31F\n\nUm projeto que combina poesia e visualização de céu estrelado com telemetria OpenTelemetry.\nDedicado a Tainara Almeida. \U0001F4AB\n\n### Como usar:\n```bash\n# Extrair o arquivo\ntar -xzf auroraboreas-{{ .Version }}-{{ .Os }}-{{ .Arch }}.tar.gz\n\n# Executar\ncd auroraboreas-{{ .Version }}\n./aurora\n```\n\n### Principais funcionalidades:\n- \U0001F4DD Geração de poemas personalizados\n- ✨ Animação de céu estrelado no terminal\n- \U0001F4CA Telemetria com OpenTelemetry\n- \U0001F433 Suporte Docker\n"
+  header: |
+    ## Aurora Boreas v{{ .Version }} 🌟
+
+    Um projeto que combina poesia e visualização de céu estrelado com telemetria OpenTelemetry.
+    Dedicado a Tainara Almeida. 💫
+
+    ### Como usar:
+    ```bash
+    # Baixar e extrair o arquivo para sua plataforma:
+    # Para Linux AMD64:
+    tar -xzf auroraboreas-{{ .Version }}-linux-amd64.tar.gz
+
+    # Para macOS ARM64 (M1/M2):
+    tar -xzf auroraboreas-{{ .Version }}-darwin-arm64.tar.gz
+
+    # Para Windows AMD64:
+    unzip auroraboreas-{{ .Version }}-windows-amd64.zip
+
+    # Executar
+    ./aurora
+    ```
+
+    ### Principais funcionalidades:
+    - 📝 Geração de poemas personalizados
+    - ✨ Animação de céu estrelado no terminal
+    - 📊 Telemetria com OpenTelemetry
+    - 🐳 Suporte Docker
   footer: |
     ---
 
@@ -91,7 +117,7 @@ archives:
   - id: aurora-archive
     builds:
       - aurora
-    name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     format: tar.gz
     format_overrides:
       - goos: windows
@@ -103,7 +129,7 @@ archives:
       - src: CHANGELOG.md
       - src: docs/**/*
 snapshot:
-  name_template: '{{ .Tag }}-next'
+  name_template: "{{ .Tag }}-next"
 checksum:
   name_template: checksums.txt
   algorithm: sha256
@@ -120,59 +146,59 @@ dockers:
 changelog:
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
-      - '^chore:'
-      - '^ci:'
-      - '^build:'
-      - '^style:'
-      - '^refactor:'
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - "^build:"
+      - "^style:"
+      - "^refactor:"
       - merge conflict
       - Merge pull request
       - Merge branch
   sort: asc
-  format: '{{ .SHA }}: {{ .Message }} ({{ with .AuthorUsername }}@{{ . }}{{ else }}{{ .AuthorName }} <{{ .AuthorEmail }}>{{ end }})'
+  format: "{{ .SHA }}: {{ .Message }} ({{ with .AuthorUsername }}@{{ . }}{{ else }}{{ .AuthorName }} <{{ .AuthorEmail }}>{{ end }})"
 dist: dist
 env_files:
   github_token: ~/.config/goreleaser/github_token
   gitlab_token: ~/.config/goreleaser/gitlab_token
   gitea_token: ~/.config/goreleaser/gitea_token
 source:
-  name_template: '{{ .ProjectName }}-{{ .Version }}'
+  name_template: "{{ .ProjectName }}-{{ .Version }}"
   format: tar.gz
 gomod:
   gobinary: go
 announce:
   twitter:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
   mastodon:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
     server: ""
   reddit:
-    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
-    url_template: '{{ .ReleaseURL }}'
+    title_template: "{{ .ProjectName }} {{ .Tag }} is out!"
+    url_template: "{{ .ReleaseURL }}"
   slack:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
     username: GoReleaser
   discord:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
     author: GoReleaser
     color: "3888754"
     icon_url: https://goreleaser.com/static/avatar.png
   teams:
-    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
-    color: '#2D313E'
+    title_template: "{{ .ProjectName }} {{ .Tag }} is out!"
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
+    color: "#2D313E"
     icon_url: https://goreleaser.com/static/avatar.png
   smtp:
-    subject_template: '{{ .ProjectName }} {{ .Tag }} is out!'
-    body_template: 'You can view details from: {{ .ReleaseURL }}'
+    subject_template: "{{ .ProjectName }} {{ .Tag }} is out!"
+    body_template: "You can view details from: {{ .ReleaseURL }}"
   mattermost:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
-    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
+    title_template: "{{ .ProjectName }} {{ .Tag }} is out!"
     username: GoReleaser
   linkedin:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
   telegram:
     message_template: '{{ mdv2escape .ProjectName }} {{ mdv2escape .Tag }} is out{{ mdv2escape "!" }} Check it out at {{ mdv2escape .ReleaseURL }}'
     parse_mode: MarkdownV2
@@ -180,10 +206,10 @@ announce:
     message_template: '{ "message": "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"}'
     content_type: application/json; charset=utf-8
   opencollective:
-    title_template: '{{ .Tag }}'
+    title_template: "{{ .Tag }}"
     message_template: '{{ .ProjectName }} {{ .Tag }} is out!<br/>Check it out at <a href="{{ .ReleaseURL }}">{{ .ReleaseURL }}</a>'
   bluesky:
-    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    message_template: "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
 git:
   tag_sort: -version:refname
 github_urls:
