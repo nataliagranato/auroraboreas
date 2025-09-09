@@ -1,0 +1,41 @@
+[tools]
+go = "1.24.4"
+pre-commit = "4.2.0"
+
+[tasks.setup]
+description = "Setup the project"
+run = ["pre-commit install", "go mod download"]
+
+[tasks.run-api]
+description = "Run the api project"
+env = { EASYZAP_LOG_TYPE = 'fmt', FEATURE_FLAGS_FILEPATH = './flags.properties' }
+sources = ["cmd/main.go", "./internal/**", "./config/**"]
+run = "go run cmd/main.go"
+
+[tasks.build]
+description = "Build the project"
+run = 'go build -o bin/main cmd/main.go'
+
+[tasks.test]
+description = "Run all tests"
+run = "go tool gotestsum --format=testname -- $(go list ./... | grep -v '/mock/') -coverprofile=coverage.out"
+
+[tasks.lint]
+description = "Run linter"
+run = 'pre-commit run --all-files'
+
+[tasks.golint]
+description = "Run golangci-lint"
+run = "go tool golangci-lint run --config=.golangci.yml"
+
+[tasks.fmt]
+description = "Format the code"
+run = ["go tool golangci-lint fmt", "go tool swag fmt"]
+
+[tasks.generators]
+description = "Run code generators"
+run = [
+  "go tool mockery",
+  "go tool swag fmt",
+  "go tool swag init -g cmd/main.go --ot \"go, yaml\" -p snakecase --parseInternal=true --generatedTime=true --requiredByDefault=true --parseDependencyLevel=1",
+]

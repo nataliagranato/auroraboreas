@@ -28,7 +28,11 @@ func TestMainFunction(t *testing.T) {
 		t.Fatalf("instrumentation crashed: %v", err)
 	}
 
-	defer inst.Shutdown(ctx)
+	defer func() {
+		if err := inst.Shutdown(ctx); err != nil {
+			t.Errorf("failed to shutdown instrumentation: %v", err)
+		}
+	}()
 
 	// Test poem generation
 	poemText := poem.ForHer()

@@ -38,12 +38,12 @@ func NewInstrumentation(ctx context.Context, opts ...Option) (*Instrumentation, 
 	return inst, nil
 }
 
-func (i *Instrumentation) Load(ctx context.Context) error {
+func (*Instrumentation) Load(_ context.Context) error {
 	// Lógica para carregar a instrumentação
 	return nil
 }
 
-func (i *Instrumentation) Run(ctx context.Context) error {
+func (*Instrumentation) Run(_ context.Context) error {
 	// Lógica para executar a instrumentação
 	return nil
 }

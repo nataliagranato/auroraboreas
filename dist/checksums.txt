@@ -1,0 +1,10 @@
+b33b605d9dc3081d5a4f58669710140b6edb77212d88cc66975c5a9bbdf9f779  auroraboreas-v0.1.0-next-darwin-amd64.tar.gz
+cd8e37a8eac66de9ccddf3abb73007d0e46ac3b40fae5435fbe0ec00d7008b43  auroraboreas-v0.1.0-next-darwin-arm64.tar.gz
+47c206d468e01181a49361b1ab926dc80c2df963606015ced210f769db24d289  auroraboreas-v0.1.0-next-freebsd-amd64.tar.gz
+0a70db3c54f55ffe635494a8d4f1d2ad5c8f3163fc28c7aa040b112fe60eb599  auroraboreas-v0.1.0-next-freebsd-arm64.tar.gz
+dedfe111c72547d018b5635f862013f8a752faf7230cd95761bb39d4eb9761d0  auroraboreas-v0.1.0-next-linux-amd64.tar.gz
+42320ea8de7f7c7b23391a50b6e858600b58a14471eb544a201487c3c03524bb  auroraboreas-v0.1.0-next-linux-arm64.tar.gz
+f3ee862e3b6a1fd9f6c95cfaf0e4c09da3a8f67201a8df9113e824d70a61d38c  auroraboreas-v0.1.0-next-linux-armv6.tar.gz
+1d0c2ad722a227994627d17c0b6da977e31084e4dc503755068b6ed5d3718d24  auroraboreas-v0.1.0-next-linux-armv7.tar.gz
+96c35f7c939c5ce2c07719bd414d0550c3a4a95ddfa6d7d0741a8cb15133cf8d  auroraboreas-v0.1.0-next-windows-amd64.zip
+9f55ecc1986cac1282f6937aa125cd3c3783cc7b4d58a941464b19c0a4c2af29  auroraboreas-v0.1.0-next-windows-arm64.zip
