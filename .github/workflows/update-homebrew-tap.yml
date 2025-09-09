@@ -37,10 +37,10 @@ jobs:
         set -Eeuo pipefail
         echo "🍺 Cloning homebrew-tap repository..."
         git clone "https://x-access-token:${{ secrets.USER_TOKEN }}@github.com/nataliagranato/homebrew-tap.git" "homebrew-tap-work"
-        cd "homebrew-tap-work"
+
+    - name: Preparar conteúdo do tap
       run: |
-        cd homebrew-tap-work
-        
+        cd "homebrew-tap-work"
         echo "📁 Creating Formula directory..."
         mkdir -p Formula
         
