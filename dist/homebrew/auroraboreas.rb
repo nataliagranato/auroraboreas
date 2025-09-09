@@ -5,21 +5,21 @@
 class Auroraboreas < Formula
   desc "Aurora Boreas - Poesia e visualização de céu estrelado"
   homepage "https://github.com/nataliagranato/auroraboreas"
-  version "v0.1.0-next"
+  version "v1.0.0-next"
   license "GPL-3.0"
 
   on_macos do
     on_intel do
-      url "https://github.com/nataliagranato/auroraboreas/releases/download/v0.1.0/auroraboreas-v0.1.0-next-darwin-amd64.tar.gz"
-      sha256 "b33b605d9dc3081d5a4f58669710140b6edb77212d88cc66975c5a9bbdf9f779"
+      url "https://github.com/nataliagranato/auroraboreas/releases/download/v1.0.0/auroraboreas-v1.0.0-next-darwin-amd64.tar.gz"
+      sha256 "435d4a89d48af9b8c258e76d153d16fcc2aea1eac69d419e078eb0076b7f0a3a"
 
       def install
         bin.install "aurora"
       end
     end
     on_arm do
-      url "https://github.com/nataliagranato/auroraboreas/releases/download/v0.1.0/auroraboreas-v0.1.0-next-darwin-arm64.tar.gz"
-      sha256 "cd8e37a8eac66de9ccddf3abb73007d0e46ac3b40fae5435fbe0ec00d7008b43"
+      url "https://github.com/nataliagranato/auroraboreas/releases/download/v1.0.0/auroraboreas-v1.0.0-next-darwin-arm64.tar.gz"
+      sha256 "7507c4de89bf353624a4b36ba246a9bb3bf270a2000b07e2010d4ad7a4dffdc5"
 
       def install
         bin.install "aurora"
@@ -30,8 +30,8 @@ class Auroraboreas < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/nataliagranato/auroraboreas/releases/download/v0.1.0/auroraboreas-v0.1.0-next-linux-amd64.tar.gz"
-        sha256 "dedfe111c72547d018b5635f862013f8a752faf7230cd95761bb39d4eb9761d0"
+        url "https://github.com/nataliagranato/auroraboreas/releases/download/v1.0.0/auroraboreas-v1.0.0-next-linux-amd64.tar.gz"
+        sha256 "d1461c67a2812ba61cfcb427d5f49409ebd2fbf4fc2d7458c919d91968b865d8"
 
         def install
           bin.install "aurora"
@@ -40,8 +40,8 @@ class Auroraboreas < Formula
     end
     on_arm do
       if !Hardware::CPU.is_64_bit?
-        url "https://github.com/nataliagranato/auroraboreas/releases/download/v0.1.0/auroraboreas-v0.1.0-next-linux-armv6.tar.gz"
-        sha256 "f3ee862e3b6a1fd9f6c95cfaf0e4c09da3a8f67201a8df9113e824d70a61d38c"
+        url "https://github.com/nataliagranato/auroraboreas/releases/download/v1.0.0/auroraboreas-v1.0.0-next-linux-armv6.tar.gz"
+        sha256 "cfad4abe1b964d46804a24270c842e223678208dbfad889574198ad0fbad5646"
 
         def install
           bin.install "aurora"
@@ -50,8 +50,8 @@ class Auroraboreas < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/nataliagranato/auroraboreas/releases/download/v0.1.0/auroraboreas-v0.1.0-next-linux-arm64.tar.gz"
-        sha256 "42320ea8de7f7c7b23391a50b6e858600b58a14471eb544a201487c3c03524bb"
+        url "https://github.com/nataliagranato/auroraboreas/releases/download/v1.0.0/auroraboreas-v1.0.0-next-linux-arm64.tar.gz"
+        sha256 "1d5d0bb7f722994b0f7dc072fbf16e963f9ad608eabe583e85d81ed3f1a15cc9"
 
         def install
           bin.install "aurora"

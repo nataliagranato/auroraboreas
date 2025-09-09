@@ -4,7 +4,7 @@ release:
     owner: nataliagranato
     name: auroraboreas
   name_template: Aurora Boreas v{{ .Version }}
-  header: "## Aurora Boreas v{{ .Version }} \U0001F31F\n\nUm projeto que combina poesia e visualização de céu estrelado com telemetria OpenTelemetry.\nDedicado a Tainara Almeida. \U0001F4AB\n\n### Como usar:\n```bash\n# Extrair o arquivo\ntar -xzf auroraboreas-{{ .Version }}-{{ .Os }}-{{ .Arch }}.tar.gz\n\n# Executar\ncd auroraboreas-{{ .Version }}\n./aurora\n```\n\n### Principais funcionalidades:\n- \U0001F4DD Geração de poemas personalizados\n- ✨ Animação de céu estrelado no terminal\n- \U0001F4CA Telemetria com OpenTelemetry\n- \U0001F433 Suporte Docker\n"
+  header: "## Aurora Boreas v{{ .Version }} \U0001F31F\n\nUm projeto que combina poesia e visualização de céu estrelado com telemetria OpenTelemetry.\nDedicado a Tainara Almeida. \U0001F4AB\n\n### Como usar:\n```bash\n# Baixar e extrair o arquivo para sua plataforma:\n# Para Linux AMD64:\ntar -xzf auroraboreas-{{ .Version }}-linux-amd64.tar.gz\n\n# Para macOS ARM64 (M1/M2):\ntar -xzf auroraboreas-{{ .Version }}-darwin-arm64.tar.gz\n\n# Para Windows AMD64:\nunzip auroraboreas-{{ .Version }}-windows-amd64.zip\n\n# Executar\n./aurora\n```\n\n### Principais funcionalidades:\n- \U0001F4DD Geração de poemas personalizados\n- ✨ Animação de céu estrelado no terminal\n- \U0001F4CA Telemetria com OpenTelemetry\n- \U0001F433 Suporte Docker\n"
   footer: |
     ---
 
@@ -54,16 +54,16 @@ builds:
     goamd64:
       - v1
     targets:
+      - freebsd_arm64
       - darwin_amd64_v1
-      - darwin_arm64
       - linux_amd64_v1
       - linux_arm64
       - linux_arm_6
-      - linux_arm_7
-      - windows_amd64_v1
       - windows_arm64
       - freebsd_amd64_v1
-      - freebsd_arm64
+      - darwin_arm64
+      - linux_arm_7
+      - windows_amd64_v1
     ignore:
       - goos: darwin
         goarch: arm
