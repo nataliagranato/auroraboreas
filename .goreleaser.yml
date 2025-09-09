@@ -7,7 +7,7 @@ project_name: auroraboreas
 builds:
   - id: aurora
     binary: aurora
-    main: ./cmd/main.go
+    main: .
     flags:
       - -trimpath
     ldflags:

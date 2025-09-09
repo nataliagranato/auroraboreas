@@ -72,7 +72,7 @@ builds:
       - goos: freebsd
         goarch: arm
     dir: .
-    main: ./cmd/main.go
+    main: .
     binary: aurora
     builder: go
     gobinary: go
