@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script simplificado para configurar o repositório homebrew-tap
-# Execute: ./setup-homebrew-tap-simple.sh
+# Execute: ./setup-homebrew-tap.sh
 
 set -e
 
