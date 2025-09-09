@@ -109,7 +109,7 @@ release:
     
     **Instalação via script:**
     ```bash
-    curl -sSL https://raw.githubusercontent.com/nataliagranato/auroraboreas/main/install.sh | bash
+    curl -sSL https://raw.githubusercontent.com/nataliagranato/auroraboreas/main/scripts/install.sh | bash
     ```
     
     Para mais informações, consulte a [documentação](https://github.com/nataliagranato/auroraboreas#readme).

@@ -25,7 +25,7 @@ Aurora Boreas é uma aplicação que imprime um poema para a amada Tainara Almei
 
 ### Via Script de Instalação (Recomendado)
 ```bash
-curl -sSL https://raw.githubusercontent.com/nataliagranato/auroraboreas/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/nataliagranato/auroraboreas/main/scripts/install.sh | bash
 ```
 
 ### Via Homebrew (macOS/Linux)
