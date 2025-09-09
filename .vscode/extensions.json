@@ -1,0 +1,31 @@
+{
+  "recommendations": [
+    "hverlin.mise-vscode",
+    "golang.go",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.makefile-tools",
+    "tamasfe.even-better-toml",
+    "ms-vscode.vscode-docker",
+    "ms-vscode.test-adapter-converter",
+    "GitHub.vscode-pull-request-github",
+    "ms-vscode.hexeditor",
+    "github.vscode-github-actions",
+    "eamodio.gitlens",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.code-runner",
+    "streetsidesoftware.code-spell-checker",
+    "wayou.vscode-todo-highlight",
+    "gruntfuggly.todo-tree",
+    "ms-vscode.vscode-go-extensionpack",
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.cpptools",
+    "ms-dotnettools.csharp",
+    "ms-python.python"
+  ]
+}

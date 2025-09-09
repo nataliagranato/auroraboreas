@@ -30,7 +30,11 @@ func main() {
 		log.Fatalf("instrumentation crashed: %v", err)
 	}
 
-	defer inst.Shutdown(ctx)
+	defer func() {
+		if err := inst.Shutdown(ctx); err != nil {
+			log.Printf("failed to shutdown instrumentation: %v", err)
+		}
+	}()
 
 	// Gerar e imprimir um poema
 	poemText := poem.ForHer()

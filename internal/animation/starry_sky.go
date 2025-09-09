@@ -10,11 +10,17 @@ func PrintStarrySky() {
 		"✦", "✧", "✩", "✪", "✫", "✬", "✭", "✮", "✯",
 	}
 
-	for i := 0; i < 10; i++ {
-		for j := 0; j < 20; j++ {
+	const (
+		rows          = 10
+		cols          = 20
+		sleepDuration = 500 * time.Millisecond
+	)
+
+	for range rows {
+		for j := range cols {
 			fmt.Print(stars[j%len(stars)] + " ")
 		}
 		fmt.Println()
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(sleepDuration)
 	}
 }

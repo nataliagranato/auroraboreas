@@ -1,0 +1,146 @@
+# GoReleaser configuration for Aurora Boreas
+# See https://goreleaser.com for documentation
+
+project_name: auroraboreas
+
+# Build configuration
+builds:
+  - id: aurora
+    binary: aurora
+    main: .
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.ShortCommit}}
+      - -X main.date={{.Date}}
+      - -X main.builtBy=goreleaser
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+      - freebsd
+    goarch:
+      - amd64
+      - arm64
+      - arm
+    goarm:
+      - 6
+      - 7
+    ignore:
+      - goos: darwin
+        goarch: arm
+      - goos: windows
+        goarch: arm
+      - goos: freebsd
+        goarch: arm
+
+# Archive configuration
+archives:
+  - id: aurora-archive
+    builds:
+      - aurora
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    wrap_in_directory: true
+    files:
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
+      - docs/**/*
+
+# Checksum
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
+# Changelog configuration
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - '^ci:'
+      - '^build:'
+      - '^style:'
+      - '^refactor:'
+      - 'merge conflict'
+      - Merge pull request
+      - Merge branch
+
+# Release configuration
+release:
+  github:
+    owner: nataliagranato
+    name: auroraboreas
+  name_template: "{{ .Tag }}"
+  header: |
+    ## Aurora Boreas v{{ .Version }} 🌟
+    
+    Um projeto que combina poesia e visualização de céu estrelado com telemetria OpenTelemetry.
+    Dedicado a Tainara Almeida. 💫
+    
+    ### Como usar:
+    ```bash
+    # Extrair o arquivo
+    tar -xzf auroraboreas-{{ .Version }}-{{ .Os }}-{{ .Arch }}.tar.gz
+    
+    # Executar
+    cd auroraboreas-{{ .Version }}
+    ./aurora
+    ```
+    
+    ### Principais funcionalidades:
+    - 📝 Geração de poemas personalizados
+    - ✨ Animação de céu estrelado no terminal
+    - 📊 Telemetria com OpenTelemetry
+    - 🐳 Suporte Docker
+    
+  footer: |
+    ---
+    
+    **Instalação via script:**
+    ```bash
+    curl -sSL https://raw.githubusercontent.com/nataliagranato/auroraboreas/main/scripts/install.sh | bash
+    ```
+    
+    Para mais informações, consulte a [documentação](https://github.com/nataliagranato/auroraboreas#readme).
+    
+    Feito com ❤️ por [@nataliagranato](https://github.com/nataliagranato)
+
+# Docker images
+dockers:
+  - image_templates:
+      - "nataliagranato/auroraboreas:{{ .Version }}"
+      - "nataliagranato/auroraboreas:latest"
+    dockerfile: Dockerfile
+
+# Homebrew tap (opcional)
+brews:
+  - name: auroraboreas
+    description: "Aurora Boreas - Poesia e visualização de céu estrelado"
+    homepage: "https://github.com/nataliagranato/auroraboreas"
+    license: "GPL-3.0"
+    repository:
+      owner: nataliagranato
+      name: homebrew-tap
+      branch: main
+    commit_author:
+      name: "Natalia Granato"
+      email: "contato@nataliagranato.xyz"
+    install: |
+      bin.install "aurora"
+    test: |
+      system "#{bin}/aurora", "--version"
+
+# Snapshot (desenvolvimento)
+snapshot:
+  name_template: "{{ .Tag }}-next"

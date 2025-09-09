@@ -1,0 +1,75 @@
+{
+  "go.toolsManagement.checkForUpdates": "local",
+  "go.useLanguageServer": true,
+  "go.formatTool": "goimports",
+  "go.lintTool": "golangci-lint",
+  "go.testFlags": ["-v", "-race"],
+  "go.testTimeout": "30s",
+  "go.coverageOptions": "showCoveredCodeOnly",
+  "go.coverageDecorator": {
+    "type": "gutter",
+    "coveredHighlightColor": "rgba(64,128,128,0.5)",
+    "uncoveredHighlightColor": "rgba(128,64,64,0.25)"
+  },
+  "go.buildOnSave": "package",
+  "go.lintOnSave": "package",
+  "go.vetOnSave": "package",
+  "go.gocodeAutoBuild": true,
+  "go.useCodeSnippetsOnFunctionSuggest": true,
+  "go.inferGopath": false,
+  "go.gopath": "/go",
+  "go.goroot": "/usr/local/go",
+  "files.exclude": {
+    "**/coverage.out": true,
+    "**/coverage.html": true,
+    "**/bin/": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/*.log": true
+  },
+  "files.watcherExclude": {
+    "**/bin/**": true,
+    "**/coverage.out": true,
+    "**/.git/**": true,
+    "**/node_modules/**": true
+  },
+  "search.exclude": {
+    "**/bin": true,
+    "**/coverage.out": true,
+    "**/vendor": true,
+    "**/node_modules": true
+  },
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "args": ["-l"]
+    }
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.{yml,yaml}",
+    "https://json.schemastore.org/docker-compose.json": "**/docker-compose*.{yml,yaml}",
+    "https://json.schemastore.org/golangci-lint.json": ".golangci.{yml,yaml}"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["mise.toml"],
+      "url": "https://mise.jdx.dev/schema/mise.json"
+    }
+  ],
+  "makefile.extensionOutputFolder": "./.vscode",
+  "testMate.cpp.test.executables": "{build,Build,BUILD,out,Out,OUT}/**/*{test,Test,TEST}*",
+  "testing.automaticallyOpenPeekView": "never",
+  "git.ignoreLimitWarning": true,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "docker.showStartPage": false,
+  "extensions.ignoreRecommendations": false,
+  "telemetry.telemetryLevel": "off"
+}

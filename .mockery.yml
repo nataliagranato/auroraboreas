@@ -1,0 +1,10 @@
+with-expecter: true
+packages:
+  go-poem-project:
+    config:
+      all: true
+      dir: "{{.InterfaceDir}}/mocks"
+      filename: "mock_{{.InterfaceName | snakecase}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      recursive: true
+      inpackage: false
