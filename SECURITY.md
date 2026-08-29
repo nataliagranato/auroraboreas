@@ -41,4 +41,4 @@ Este projeto segue as seguintes práticas:
 - GitHub Advanced Security
 - Dependabot
 - CodeQL Analysis
-- Scorecard Supply-Chain Security
+- OpenSSF e práticas recomendadas de segurança

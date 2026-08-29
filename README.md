@@ -5,7 +5,6 @@
 [![CodeQL Advanced](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/codeql.yml)
 [![Go](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml/badge.svg)](https://github.com/nataliagranato/aurora-boreas/actions/workflows/go.yml)
 [![Release](https://github.com/nataliagranato/auroraboreas/actions/workflows/release.yml/badge.svg)](https://github.com/nataliagranato/auroraboreas/actions/workflows/release.yml)
-[![Scorecard supply-chain security](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml/badge.svg)](https://github.com/nataliagranato/auroraboreas/actions/workflows/scorecard.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/9918/badge)](https://www.bestpractices.dev/projects/9918)
 [![Docker Pulls](https://img.shields.io/docker/pulls/nataliagranato/auroraboreas)](https://hub.docker.com/r/nataliagranato/auroraboreas)
 

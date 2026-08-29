@@ -5,7 +5,7 @@ Este devcontainer foi configurado especificamente para o projeto Aurora Boreas, 
 ## 🚀 Ferramentas Incluídas
 
 ### Linguagens e Runtime
-- **Go 1.23+** - Linguagem principal do projeto
+- **Go 1.25+** - Linguagem principal do projeto
 - **Node.js LTS** - Para ferramentas de desenvolvimento frontend
 - **Python 3** - Para pre-commit e scripts
 
